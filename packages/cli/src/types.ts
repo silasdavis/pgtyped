@@ -67,6 +67,10 @@ export const DefaultTypeMapping = Object.freeze({
 
   // Bytes
   bytea: Bytes,
+
+  // Postgres catalog types
+  oid: Number,
+  name: String,
 });
 
 export type BuiltinTypes = keyof typeof DefaultTypeMapping;

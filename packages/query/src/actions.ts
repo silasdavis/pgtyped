@@ -1,6 +1,7 @@
 import { AsyncQueue, messages, PreparedObjectType } from '@pgtyped/wire';
 import crypto from 'crypto';
 import debugBase from 'debug';
+import { getCatalogTypes } from './actions.queries';
 
 import { IInterpolatedQuery, QueryParam } from './preprocessor';
 import { DatabaseTypeKind, isEnum, MappableType } from './type';
@@ -219,6 +220,7 @@ export function reduceTypeRows(
   }, {} as Record<string, MappableType>);
 }
 
+
 // TODO: self-host
 async function runTypesCatalogQuery(
   typeOIDs: number[],
@@ -256,6 +258,7 @@ export async function getTypes(
   const paramTypeOIDs = params.map((p) => p.oid);
   const returnTypesOIDs = fields.map((f) => f.typeOID);
   const usedTypesOIDs = paramTypeOIDs.concat(returnTypesOIDs);
+  await getCatalogTypes.run({ oids: usedTypesOIDs }, queue);
   const typeRows = await runTypesCatalogQuery(usedTypesOIDs, queue);
   const typeMap = reduceTypeRows(typeRows);
 

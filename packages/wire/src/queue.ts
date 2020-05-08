@@ -8,7 +8,7 @@ import {
   ParseResult,
 } from './protocol';
 
-import { IClientMessage, TMessage, IServerMessage } from './messages';
+import { IClientMessage, TMessage, IServerMessage, messages } from './messages';
 
 import debugBase from 'debug';
 const debug = debugBase('pg-wire:socket');
@@ -77,6 +77,7 @@ export class AsyncQueue {
       this.processQueue();
     }
   }
+
   /**
    * Waits for the next message to arrive and parses it, resolving with the parsed value.
    * @param messages The message type to parse or an array of messages to match any of them

@@ -1,0 +1,34 @@
+{
+  "transforms": [
+    {
+      "mode": "sql",
+      "include": "**/*.sql",
+      "emitTemplate": "{{dir}}/{{name}}.queries.ts"
+    },
+    {
+      "mode": "ts",
+      "include": "sample.ts",
+      "emitTemplate": "{{dir}}/{{name}}.types.ts"
+    }
+  ],
+  "types": {
+    "int:": {
+      "name": "WholeNumber",
+      "from": "../whole-number"
+    },
+    "bytea": {
+      "name": "Uint8Array"
+    },
+    "shipping_status": {
+      "name": "ShippingStatus",
+      "enumValues": ["Shipped", "Pending"]
+    }
+  },
+  "srcDir": "./src/",
+  "db": {
+    "host": "127.0.0.1",
+    "user": "postgres",
+    "dbName": "postgres",
+    "password": "password"
+  }
+}
